@@ -25,6 +25,23 @@ package org.ribbon.enteties;
 public class Directory {
     
     /**
+     * Default constructor.
+     */
+    public Directory() {};
+    
+    /**
+     * Parametric constructor.
+     * @param givenPath full path of directory;
+     * @param givenDescription description string for directory;
+     * @param givenHideFlag visibility flag for ordinary user;
+     */
+    public Directory(String givenPath, String givenDescription, Boolean givenHideFlag) {
+        this.path = givenPath;
+        this.description = givenDescription;
+        this.isHidden = givenHideFlag;
+    }
+    
+    /**
      * Id of user entry.
      */
     private int id = -1;

@@ -25,6 +25,34 @@ package org.ribbon.enteties;
 public class Permission {
     
     /**
+     * Default constructor.
+     */
+    public Permission() {};
+    
+    /**
+     * Full parametric constructor.
+     * @param givenDirId referenced id of directory;
+     * @param givenGroupPerm flag for group permission;
+     * @param givenAllPerm flag for ALL service group permission;
+     * @param givenUserId referenced id of user (may be null);
+     * @param givenGroupId referenced id of group (may be null);
+     * @param givenReadFlag permission read access flag;
+     * @param givenPostFlag permission post access flag;
+     * @param givenAdminFlag permission admin access flag;
+     */
+    public Permission(int givenDirId, Boolean givenGroupPerm, Boolean givenAllPerm,
+            int givenUserId, int givenGroupId, Boolean givenReadFlag, Boolean givenPostFlag, Boolean givenAdminFlag) {
+        this.dirId = givenDirId;
+        this.groupPerm = givenGroupPerm;
+        this.allPerm = givenAllPerm;
+        this.userId = givenUserId;
+        this.groupId = givenGroupId;
+        this.mayRead = givenReadFlag;
+        this.mayPost = givenPostFlag;
+        this.mayAdmin = givenAdminFlag;
+    }
+    
+    /**
      * Id of user entry.
      */
     private int id = -1;
