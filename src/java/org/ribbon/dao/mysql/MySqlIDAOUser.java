@@ -37,7 +37,7 @@ public class MySqlIDAOUser implements org.ribbon.dao.IDAOUser {
             PreparedStatement pstn = null;
             ResultSet res = null;
             try {
-                conn = Utils.getNewConnection();
+                conn = Utils.getConnection();
                 pstn = conn.prepareStatement("INSERT INTO User (login,description,passw,crt_date,log_date,is_admin,is_enabled,is_active) VALUES(?,?,?,?,?,?,?,0);", Statement.RETURN_GENERATED_KEYS);
                 pstn.setString(1, givenUser.getLogin());
                 pstn.setString(2, givenUser.getDescription());
@@ -62,9 +62,7 @@ public class MySqlIDAOUser implements org.ribbon.dao.IDAOUser {
                     if (pstn != null) {
                         pstn.close();
                     }
-                    if (conn != null) {
-                        conn.close();
-                    }
+                    Utils.closeConnection(conn);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -73,7 +71,7 @@ public class MySqlIDAOUser implements org.ribbon.dao.IDAOUser {
             Connection conn = null;
             PreparedStatement pstn = null;
             try {
-                conn = Utils.getNewConnection();
+                conn = Utils.getConnection();
                 pstn = conn.prepareStatement("UPDATE User SET login=?, description=?, passw=?, crt_date=?, log_date=?, is_admin=?, is_enabled=?, is_active=? WHERE id=" + givenUser.getId() + ";");
                 pstn.setString(1, givenUser.getLogin());
                 pstn.setString(2, givenUser.getDescription());
@@ -93,9 +91,7 @@ public class MySqlIDAOUser implements org.ribbon.dao.IDAOUser {
                     if (pstn != null) {
                         pstn.close();
                     }
-                    if (conn != null) {
-                        conn.close();
-                    }
+                    Utils.closeConnection(conn);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -105,12 +101,12 @@ public class MySqlIDAOUser implements org.ribbon.dao.IDAOUser {
 
     @Override
     public User getUserById(int givenId) {
-        User currUser = new User();
         Connection conn = null;
         Statement stn = null;
         ResultSet res = null;
         try {
-            conn = Utils.getNewConnection();
+            User currUser = new User();
+            conn = Utils.getConnection();
             stn = conn.createStatement();
             res = stn.executeQuery("SELECT * FROM User WHERE id=" + givenId + ";");
             res.next();
@@ -123,10 +119,13 @@ public class MySqlIDAOUser implements org.ribbon.dao.IDAOUser {
             currUser.setIsAdmin(res.getBoolean("is_admin"));
             currUser.setIsEnabled(res.getBoolean("is_enabled"));
             currUser.setIsActive(res.getBoolean("is_active"));
+            return currUser;
         } catch (NamingException ex) {
             ex.printStackTrace();
+            return null;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return null;
         } finally {
             try {
                 if (res != null) {
@@ -135,24 +134,21 @@ public class MySqlIDAOUser implements org.ribbon.dao.IDAOUser {
                 if (stn != null) {
                     stn.close();
                 }
-                if (conn != null) {
-                    conn.close();
-                }
+                Utils.closeConnection(conn);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         }
-        return currUser;
     }
 
     @Override
     public User getUserByLogin(String givenLogin) {
-        User currUser = new User();
         Connection conn = null;
         Statement stn = null;
         ResultSet res = null;
         try {
-            conn = Utils.getNewConnection();
+            User currUser = new User();
+            conn = Utils.getConnection();
             stn = conn.createStatement();
             res = stn.executeQuery("SELECT * FROM User WHERE login='" + givenLogin + "';");
             res.next();
@@ -165,10 +161,13 @@ public class MySqlIDAOUser implements org.ribbon.dao.IDAOUser {
             currUser.setIsAdmin(res.getBoolean("is_admin"));
             currUser.setIsEnabled(res.getBoolean("is_enabled"));
             currUser.setIsActive(res.getBoolean("is_active"));
+            return currUser;
         } catch (NamingException ex) {
             ex.printStackTrace();
+            return null;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return null;
         } finally {
             try {
                 if (res != null) {
@@ -177,24 +176,21 @@ public class MySqlIDAOUser implements org.ribbon.dao.IDAOUser {
                 if (stn != null) {
                     stn.close();
                 }
-                if (conn != null) {
-                    conn.close();
-                }
+                Utils.closeConnection(conn);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         }
-        return currUser;
     }
 
     @Override
     public List<User> getAll() {
-        List<User> rList = new ArrayList<User>();
         Connection conn = null;
         Statement stn = null;
         ResultSet res = null;
         try {
-            conn = Utils.getNewConnection();
+            List<User> rList = new ArrayList<User>();
+            conn = Utils.getConnection();
             stn = conn.createStatement();
             res = stn.executeQuery("SELECT * FROM User;");
             while(res.next()) {
@@ -210,10 +206,13 @@ public class MySqlIDAOUser implements org.ribbon.dao.IDAOUser {
                 currUser.setIsActive(res.getBoolean("is_active"));
                 rList.add(currUser);
             }
+            return rList;
         } catch (NamingException ex) {
             ex.printStackTrace();
+            return null;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return null;
         } finally {
             try {
                 if (res != null) {
@@ -222,24 +221,21 @@ public class MySqlIDAOUser implements org.ribbon.dao.IDAOUser {
                 if (stn != null) {
                     stn.close();
                 }
-                if (conn != null) {
-                    conn.close();
-                }
+                Utils.closeConnection(conn);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         }
-        return rList;
     }
 
     @Override
     public List<User> getUsersByGroupId(int givenGroupId, Boolean includeDisabled) {
-        List<User> rList = new ArrayList<User>();
         Connection conn = null;
         Statement stn = null;
         ResultSet res = null;
         try {
-            conn = Utils.getNewConnection();
+            List<User> rList = new ArrayList<User>();
+            conn = Utils.getConnection();
             stn = conn.createStatement();
             if (includeDisabled) {
                 res = stn.executeQuery("SELECT User.* FROM User JOIN UserGroupsRel WHERE User.id=user_id AND group_id=1;");
@@ -259,10 +255,13 @@ public class MySqlIDAOUser implements org.ribbon.dao.IDAOUser {
                 currUser.setIsActive(res.getBoolean("is_active"));
                 rList.add(currUser);
             }
+            return rList;
         } catch (NamingException ex) {
             ex.printStackTrace();
+            return null;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return null;
         } finally {
             try {
                 if (res != null) {
@@ -278,7 +277,6 @@ public class MySqlIDAOUser implements org.ribbon.dao.IDAOUser {
                 ex.printStackTrace();
             }
         }
-        return rList;
     }
     
 }

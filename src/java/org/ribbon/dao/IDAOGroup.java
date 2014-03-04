@@ -37,20 +37,20 @@ public interface IDAOGroup {
     /**
      * Get group entity by it's id.
      * @param givenId id to search;
-     * @return finded group entity;
+     * @return finded group entity or null;
      */
     public Group getGroupById(int givenId);
     
     /**
      * Get group entity by it's login.
      * @param givenName id to search;
-     * @return finded group entity;
+     * @return finded group entity or null;
      */
     public Group getGroupByName(String givenName);
     
     /**
      * Get all grouos.
-     * @return list of groups sorted by names;
+     * @return list of groups sorted by names or null;
      */
     public List<Group> getAll();
     
@@ -58,7 +58,7 @@ public interface IDAOGroup {
      * Get groups of specified user;
      * @param givenUserId user id to search; 
      * @param includeDisabled include in result disabled relations;
-     * @return list of groups entries;
+     * @return list of groups entries or null;
      */
     public List<Group> getGroupsByUserId(int givenUserId, Boolean includeDisabled);
     

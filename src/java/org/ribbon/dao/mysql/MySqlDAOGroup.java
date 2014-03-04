@@ -18,8 +18,10 @@
 
 package org.ribbon.dao.mysql;
 
-import java.util.List;
+import java.util.*;
 import org.ribbon.enteties.Group;
+import org.ribbon.service.*;
+import java.sql.*;
 
 /**
  * MySql implementation of Group DAO.
@@ -29,22 +31,166 @@ public class MySqlDAOGroup implements org.ribbon.dao.IDAOGroup {
 
     @Override
     public boolean save(Group givenGroup) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (givenGroup.getId() == -1) {
+            Connection conn = null;
+            PreparedStatement pstn = null;
+            ResultSet res = null;
+            try {
+                conn = Utils.getConnection();
+                pstn = conn.prepareStatement("INSERT INTO Groups (name,description) VALUES(?,?);", Statement.RETURN_GENERATED_KEYS);
+                pstn.setString(1, givenGroup.getName());
+                pstn.setString(2, givenGroup.getDescription());
+                pstn.executeUpdate();
+                res = pstn.getGeneratedKeys();
+                res.next();
+                givenGroup.setId(res.getInt(1));
+                return true;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return false;
+            } finally {
+                try {
+                    if (res != null) {
+                        res.close();
+                    }
+                    if (pstn != null) {
+                        pstn.close();
+                    }
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        } else {
+            Connection conn = null;
+            PreparedStatement pstn = null;
+            try {
+                conn = Utils.getConnection();
+                pstn = conn.prepareStatement("UPDATE Groups SET name=?, description=? WHERE id=?;");
+                pstn.setString(1, givenGroup.getName());
+                pstn.setString(2, givenGroup.getDescription());
+                pstn.setInt(3, givenGroup.getId());
+                pstn.executeUpdate();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            } finally {
+                try {
+                    if (pstn != null) {
+                        pstn.close();
+                    }
+                    Utils.closeConnection(conn);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+        return false;
     }
 
     @Override
     public Group getGroupById(int givenId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = null;
+        PreparedStatement pstn = null;
+        ResultSet res = null;
+        try {
+            Group newGroup = new Group();
+            conn = Utils.getConnection();
+            pstn = conn.prepareStatement("SELECT * FROM Groups WHERE id=?;");
+            pstn.setInt(1, givenId);
+            res = pstn.executeQuery();
+            res.next();
+            newGroup.setId(res.getInt("id"));
+            newGroup.setName(res.getString("name"));
+            newGroup.setDescription(res.getString("description"));
+            return newGroup;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (res != null) {
+                    res.close();
+                }
+                if (pstn != null) {
+                    pstn.close();
+                }
+                Utils.closeConnection(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override
     public Group getGroupByName(String givenName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = null;
+        PreparedStatement pstn = null;
+        ResultSet res = null;
+        try {
+            Group newGroup = new Group();
+            conn = Utils.getConnection();
+            pstn = conn.prepareStatement("SELECT * FROM Groups WHERE name=?;");
+            pstn.setString(1, givenName);
+            res = pstn.executeQuery();
+            res.next();
+            newGroup.setId(res.getInt("id"));
+            newGroup.setName(res.getString("name"));
+            newGroup.setDescription(res.getString("description"));
+            return newGroup;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (res != null) {
+                    res.close();
+                }
+                if (pstn != null) {
+                    pstn.close();
+                }
+                Utils.closeConnection(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override
     public List<Group> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = null;
+        Statement stn = null;
+        ResultSet res = null;
+        try {
+            List<Group> rList = new ArrayList<Group>();
+            conn = Utils.getConnection();
+            stn = conn.createStatement();
+            res = stn.executeQuery("SELECT * FROM Groups;");
+            while (res.next()) {
+                Group addGroup = new Group();
+                addGroup.setId(res.getInt("id"));
+                addGroup.setName(res.getString("name"));
+                addGroup.setDescription(res.getString("description"));
+                rList.add(addGroup);
+            }
+            return rList;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (res != null) {
+                    res.close();
+                }
+                if (stn != null) {
+                    stn.close();
+                }
+                Utils.closeConnection(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override

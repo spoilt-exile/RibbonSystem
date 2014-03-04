@@ -37,20 +37,20 @@ public interface IDAOUser {
     /**
      * Get user entity by it's id.
      * @param givenId id to search;
-     * @return finded user entity;
+     * @return finded user entity or null;
      */
     public User getUserById(int givenId);
     
     /**
      * Get user entity by it's login.
      * @param givenLogin id to search;
-     * @return finded user entity;
+     * @return finded user entity or null;
      */
     public User getUserByLogin(String givenLogin);
     
     /**
      * Get all users.
-     * @return list of users sorted by logins;
+     * @return list of users sorted by logins or null;
      */
     public List<User> getAll();
     
@@ -58,7 +58,7 @@ public interface IDAOUser {
      * Get users which belongs to specified group;
      * @param givenGroupId group id to search; 
      * @param includeDisabled include in result disabled relations;
-     * @return list of users entries;
+     * @return list of users entries or null;
      */
     public List<User> getUsersByGroupId(int givenGroupId, Boolean includeDisabled);
     

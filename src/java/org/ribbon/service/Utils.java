@@ -57,9 +57,20 @@ public class Utils {
      * @throws NamingException if resource not available;
      * @throws SQLException if connection cann't be established;
      */
-    public static Connection getNewConnection() throws NamingException, SQLException {
+    public static Connection getConnection() throws NamingException, SQLException {
         Connection newcon = null;
         DataSource ds = (DataSource) InitialContext.doLookup("java:comp/env/jdbc/ribbon");
         return ds.getConnection();
+    }
+    
+    /**
+     * Close used connection and place it to the pool.
+     * @param usedConn connection to close;
+     * @throws SQLException if something went wrong;
+     */
+    public static void closeConnection(Connection usedConn) throws SQLException {
+        if (usedConn != null) {
+            usedConn.close();
+        }
     }
 }
