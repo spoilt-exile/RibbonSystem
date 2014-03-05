@@ -16,14 +16,16 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package org.ribbon.Controller;
+package org.ribbon.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.ribbon.commands.*;
 
 /**
  * Ribbon system controller.
@@ -42,22 +44,19 @@ public class Ribbon extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        String page = null;
         try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Ribbon</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Ribbon at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {
-            out.close();
+            Command command = CommandFactory.getInstance().getCommand(request);            
+            page = command.execute(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+            page = Router.ERROR_PAGE;
+        } catch (IOException e){
+            e.printStackTrace();
+            page = Router.ERROR_PAGE;
         }
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

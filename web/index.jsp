@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 12 лют 2014, 12:16:50
-    Author     : spoilt
+    Author     : Stanislav Nepochatov
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,13 +13,11 @@
     </head>
     <body>
         <div align="center">
-        <form action="user_add.jsp" method="POST" name="user-add"> <br/>
+        <form action="/Ribbon" method="POST" name="user-add"> <br/>
+            <input type="hidden" name="command" value="LOGIN">
             <b>ЛОГІН:</b> <input type="text" name="login" maxlength="125"> <br/>
-            <b>ОПИС:</b> <input type="text" name="description" maxlength="150"> <br/>
             <b>ПАРОЛЬ:</b> <input type="password" name="passw"> <br/>
-            <b>АДМІН:</b> <input type="checkbox" name="isadmin"> <br/>
-            <b>УВІМКНЕНИЙ:</b> <input type="checkbox" name="isenabled" checked="checked"> <br/>
-            <input type="submit" value="Додати користувача">
+            <input type="submit" value="Увійти до системи">
         </form>
         </div>
     </body>

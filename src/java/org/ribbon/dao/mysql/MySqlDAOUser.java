@@ -78,9 +78,9 @@ public class MySqlDAOUser implements org.ribbon.dao.IDAOUser {
                 pstn.setString(3, givenUser.getPassw());
                 pstn.setDate(4, new java.sql.Date(givenUser.getCrtDate().getTime()));
                 pstn.setDate(5, new java.sql.Date(givenUser.getLogDate().getTime()));
-                pstn.setBoolean(7, givenUser.getIsAdmin());
-                pstn.setBoolean(8, givenUser.getIsEnabled());
-                pstn.setBoolean(9, givenUser.getIsActive());
+                pstn.setBoolean(6, givenUser.getIsAdmin());
+                pstn.setBoolean(7, givenUser.getIsEnabled());
+                pstn.setBoolean(8, givenUser.getIsActive());
                 pstn.executeUpdate();
                 return true;
             } catch (Exception ex) {

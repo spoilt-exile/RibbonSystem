@@ -174,7 +174,7 @@ public class User {
      * @param create_date the date to set
      */
     public void setCrtDate(Date create_date) {
-        this.logDate = create_date;
+        this.crtDate = create_date;
     }
 
     /**
