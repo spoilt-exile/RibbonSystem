@@ -39,12 +39,12 @@ public class MySqlDAOFactory extends org.ribbon.dao.DAOFactory {
 
     @Override
     public IDAOUser getNewIDaoUserInstance() {
-        return new MySqlIDAOUser();
+        return new MySqlDAOUser();
     }
 
     @Override
     public IDAOGroup getNewIDaoGroupInstance() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new MySqlDAOGroup();
     }
     
     /**

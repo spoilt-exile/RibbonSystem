@@ -28,7 +28,7 @@ import org.ribbon.service.*;
  * MySql implementation of User DAO.
  * @author Stanislav Nepochatov
  */
-public class MySqlIDAOUser implements org.ribbon.dao.IDAOUser {
+public class MySqlDAOUser implements org.ribbon.dao.IDAOUser {
 
     @Override
     public boolean save(User givenUser) {
