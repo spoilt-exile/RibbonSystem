@@ -24,7 +24,20 @@ package org.ribbon.commands;
  */
 public enum CommandTypes {
     
-    LOGIN(new ComLogin());
+    /**
+     * LOGIN command object.
+     */
+    LOGIN(new ComLogin()),
+    
+    /**
+     * MAIN command object.
+     */
+    MAIN(new ComMain()),
+    
+    /**
+     * LOGOUT command object.
+     */
+    LOGOUT(new ComLogout());
     
     /**
      * Internal command class.

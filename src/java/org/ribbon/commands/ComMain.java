@@ -19,36 +19,30 @@
 package org.ribbon.commands;
 
 import java.io.IOException;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.ribbon.controller.Router;
+import org.ribbon.dao.mysql.MySqlDAOFactory;
 import org.ribbon.enteties.User;
-import org.ribbon.dao.mysql.*;
-import org.ribbon.service.Utils;
-import java.util.Date;
 
 /**
- * LOGIN command class.
+ * MAIN command class (check session and load main page, used by default by calling root of controller).
  * @author Stanislav Nepochatov
  */
-public class ComLogin implements Command {
+public class ComMain implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User findedUser = MySqlDAOFactory.getNewInstance().getNewIDaoUserInstance().getUserByLogin(request.getParameter("login"));
-        if (findedUser == null) {
-            response.addHeader("login_error", "NOT_FOUND_OR_INCORRECT_PASSWD " + request.getParameter("login"));
-            return Router.DEFAULT_PAGE;
-        }
-        if (findedUser.getPassw().equals(Utils.getHash(request.getParameter("passw")))) {
-            request.getSession().setAttribute("username", findedUser.getLogin());
+        User findedUser = MySqlDAOFactory.getNewInstance().getNewIDaoUserInstance().getUserByLogin((String) request.getSession().getAttribute("username"));
+        if (findedUser != null) {
             findedUser.setIsActive(true);
             findedUser.setLogDate(new Date());
             MySqlDAOFactory.getNewInstance().getNewIDaoUserInstance().save(findedUser);
             return Router.MAIN_PAGE;
         } else {
-            response.addHeader("login_error", "NOT_FOUND_OR_INCORRECT_PASSWD " + request.getParameter("login"));
+            request.getSession().removeAttribute("username");
             return Router.DEFAULT_PAGE;
         }
     }

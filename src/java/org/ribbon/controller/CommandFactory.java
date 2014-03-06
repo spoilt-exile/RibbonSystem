@@ -55,10 +55,19 @@ public class CommandFactory {
      */
     public Command getCommand(HttpServletRequest request) {
         try {
-            return CommandTypes.valueOf(request.getParameter("command")).getCommand();
+            Command getComm = CommandTypes.valueOf(request.getParameter("command")).getCommand();
+            if (getComm.isAuthRequired() == true) {
+                if (request.getSession().getAttribute("username") != null) {
+                    return getComm;
+                } else {
+                    return CommandTypes.MAIN.getCommand();
+                }
+            } else {
+                return getComm;
+            }
         } catch (IllegalArgumentException ex) {
             ex.printStackTrace();
-            return null;    //TO-DO implement normal error page;
+            return CommandTypes.MAIN.getCommand();
         }
     }
 }

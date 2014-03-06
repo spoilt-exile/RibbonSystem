@@ -13,5 +13,8 @@
     </head>
     <body>
         <h1>ТУТ ЩЕ НІЧОГО НЕМАЄ</h1>
+        <%= request.getSession().getAttribute("username") %>
+        <br/>
+        <a href="/Ribbon?command=LOGOUT">ВИЙТИ</a>
     </body>
 </html>

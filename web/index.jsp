@@ -12,13 +12,10 @@
         <title>Система обробки повідомлень "СТРІЧКА"</title>
     </head>
     <body>
-        <div align="center">
-        <form action="/Ribbon" method="POST" name="user-add"> <br/>
-            <input type="hidden" name="command" value="LOGIN">
-            <b>ЛОГІН:</b> <input type="text" name="login" maxlength="125"> <br/>
-            <b>ПАРОЛЬ:</b> <input type="password" name="passw"> <br/>
-            <input type="submit" value="Увійти до системи">
-        </form>
-        </div>
+        <% if (request.getSession().getAttribute("username") != null) { %>
+            <% response.sendRedirect("/Ribbon?command=FORWARD_LOGIN"); %>
+        <% } else { %>
+            <% response.sendRedirect("/login.jsp"); %>
+        <% } %>
     </body>
 </html>
