@@ -45,6 +45,11 @@ public enum CommandTypes {
     LIST_DIRS(new ComListDirs()),
     
     /**
+     * LIST_MESG command object.
+     */
+    LIST_MESG(new ComListMesg()),
+    
+    /**
      * HEADER command object.
      */
     HEADER(new ComHeader());

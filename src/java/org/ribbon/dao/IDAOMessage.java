@@ -18,33 +18,33 @@
 
 package org.ribbon.dao;
 
+import java.util.List;
+import org.ribbon.enteties.Message;
+
 /**
- * Abstract DAO factory class;
+ * RibbonSystem message DAO interface;
  * @author Stanislav Nepochatov
  */
-public abstract class DAOFactory {
+public interface IDAOMessage {
     
     /**
-     * Get IDAOUser new instance from factory;
-     * @return new instance of user DAO;
+     * Insert or update entity in database.
+     * @param givenMessage message entity to save;
+     * @return result of operation;
      */
-    public abstract IDAOUser getNewIDaoUserInstance();
+    public boolean save(Message givenMessage);
     
     /**
-     * Get IDAOGroup new instance from factory;
-     * @return new instance of group DAO;
+     * Get directory entity by it's id.
+     * @param givenId id to search;
+     * @return finded idr entity or null;
      */
-    public abstract IDAOGroup getNewIDaoGroupInstance();
+    public Message getMessageById(int givenId);
     
     /**
-     * Get IDAODirectory new instance from factory;
-     * @return new instance of directory DAO;
+     * Get messages by directory id.
+     * @return list of messages sorted by id (desc) or null;
      */
-    public abstract IDAODirectory getNewDaoDirectoryInstance();
+    public List<Message> getMessagesByDirId(int givenDirId);
     
-    /**
-     * Get IDAOMessage new instance from factory;
-     * @return new instance of message DAO;
-     */
-    public abstract IDAOMessage getNewDaoMessageInstance();
 }

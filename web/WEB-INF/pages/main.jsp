@@ -15,7 +15,7 @@
         <frame src="/Ribbon?command=HEADER" noresize scrolling="no">
         <frameset rows="*" cols="20%,80%" border="2px">
             <frame src="/Ribbon?command=LIST_DIRS">
-            <frame src="/Ribbon?command=HEADER">
+            <frame name="MSG" src="/Ribbon?command=LIST_MESG">
         </frameset>
     </frameset>
 </html>

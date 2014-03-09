@@ -1,5 +1,5 @@
 # Create RibbonSystem database structure;
-# Data base structure version = 2;
+# Data base structure version = 2.1;
 
 #RIBBON USER CREATE
 CREATE USER 'ribbon'@'localhost' IDENTIFIED BY '9ARb@Pas$';
@@ -77,10 +77,12 @@ FOREIGN KEY (group_id) REFERENCES Groups(id)
 CREATE TABLE Message (
 id		int AUTO_INCREMENT not null,
 header		text(500) not null,
+dir_id		int not null,
 post_date	timestamp not null,
 auth_id		int not null,
 is_urgent	boolean not null,
 body		mediumtext not null,
 PRIMARY KEY (id),
-FOREIGN KEY (auth_id) REFERENCES User(id)
+FOREIGN KEY (auth_id) REFERENCES User(id),
+FOREIGN KEY (dir_id) REFERENCES Directory(id)
 );

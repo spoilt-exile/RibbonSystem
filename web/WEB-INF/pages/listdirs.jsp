@@ -14,7 +14,7 @@
     </head>
     <body>
         <c:forEach var="directory" items="${dirs}">
-            ${directory.path} <br/>
+            <a href="/Ribbon?command=LIST_MESG&mid=${directory.id}" target="MSG">${directory.path}</a> <br/>
         </c:forEach>
     </body>
 </html>

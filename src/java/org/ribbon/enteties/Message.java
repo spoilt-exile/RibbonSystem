@@ -57,6 +57,11 @@ public class Message {
     private String header;
     
     /**
+     * Id of directory which contains this message.
+     */
+    private int dirId;
+    
+    /**
      * Date of posting this message.
      */
     private Date postDate;
@@ -110,6 +115,22 @@ public class Message {
         this.header = header;
     }
 
+    /**
+     * Get id of referenced directory.
+     * @return the integer id of directory;
+     */
+    public int getDirId() {
+        return dirId;
+    }
+
+    /**
+     * Set id of referenced directory (equal to move message).
+     * @param dirId the new id to set;
+     */
+    public void setDirId(int dirId) {
+        this.dirId = dirId;
+    }
+    
     /**
      * Get date of message posting.
      * @return the date of posting;
