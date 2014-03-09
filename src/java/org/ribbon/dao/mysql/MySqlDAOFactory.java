@@ -18,6 +18,7 @@
 
 package org.ribbon.dao.mysql;
 
+import org.ribbon.dao.IDAODirectory;
 import org.ribbon.dao.IDAOGroup;
 import org.ribbon.dao.IDAOUser;
 
@@ -45,6 +46,11 @@ public class MySqlDAOFactory extends org.ribbon.dao.DAOFactory {
     @Override
     public IDAOGroup getNewIDaoGroupInstance() {
         return new MySqlDAOGroup();
+    }
+    
+    @Override
+    public IDAODirectory getNewDaoDirectoryInstance() {
+        return new MySqlDAODirectory();
     }
     
     /**

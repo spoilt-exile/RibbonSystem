@@ -18,48 +18,40 @@
 
 package org.ribbon.dao;
 
-import java.util.*;
+import java.util.List;
 import org.ribbon.enteties.*;
 
 /**
- * Ribbon system group DAO interface.
+ * RibbonSystem directory DAO interface;
  * @author Stanislav Nepochatov
  */
-public interface IDAOGroup {
+public interface IDAODirectory {
     
     /**
      * Insert or update entity in database.
-     * @param givenGroup group entity to save;
+     * @param givenDir dir entity to save;
      * @return result of operation;
      */
-    public boolean save(Group givenGroup);
+    public boolean save(Directory givenDir);
     
     /**
-     * Get group entity by it's id.
+     * Get directory entity by it's id.
      * @param givenId id to search;
-     * @return finded group entity or null;
+     * @return finded idr entity or null;
      */
-    public Group getGroupById(int givenId);
+    public Directory getDirById(int givenId);
     
     /**
-     * Get group entity by it's login.
-     * @param givenName id to search;
-     * @return finded group entity or null;
+     * Get dir entity by it's path.
+     * @param givenPath id to search;
+     * @return finded dir entity or null;
      */
-    public Group getGroupByName(String givenName);
+    public Directory getDirByPath(String givenPath);
     
     /**
-     * Get all grouos.
-     * @return list of groups sorted by names or null;
+     * Get all directories.
+     * @return list of directories sorted by path or null;
      */
-    public List<Group> getAll();
-    
-    /**
-     * Get groups of specified user;
-     * @param givenUserId user id to search; 
-     * @param includeDisabled include in result disabled relations;
-     * @return list of groups entries or null;
-     */
-    public List<Group> getGroupsByUserId(int givenUserId, Boolean includeDisabled);
+    public List<Directory> getAll();
     
 }

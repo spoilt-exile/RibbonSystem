@@ -36,4 +36,9 @@ public abstract class DAOFactory {
      */
     public abstract IDAOGroup getNewIDaoGroupInstance();
     
+    /**
+     * Get IDAODirectory new instance from factory;
+     * @return new instance of directory DAO;
+     */
+    public abstract IDAODirectory getNewDaoDirectoryInstance();
 }

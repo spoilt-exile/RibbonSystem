@@ -21,13 +21,14 @@ package org.ribbon.dao.mysql;
 import java.util.*;
 import org.ribbon.enteties.Group;
 import org.ribbon.service.*;
+import org.ribbon.dao.*;
 import java.sql.*;
 
 /**
  * MySql implementation of Group DAO.
  * @author Stanislav Nepochatov
  */
-public class MySqlDAOGroup implements org.ribbon.dao.IDAOGroup {
+public class MySqlDAOGroup implements IDAOGroup {
 
     @Override
     public boolean save(Group givenGroup) {
@@ -56,9 +57,7 @@ public class MySqlDAOGroup implements org.ribbon.dao.IDAOGroup {
                     if (pstn != null) {
                         pstn.close();
                     }
-                    if (conn != null) {
-                        conn.close();
-                    }
+                    Utils.closeConnection(conn);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
