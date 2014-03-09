@@ -11,10 +11,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>ГОЛОВНА СТОРІНКА "СТРІЧКА"</title>
     </head>
-    <body>
-        <h1>ТУТ ЩЕ НІЧОГО НЕМАЄ</h1>
-        <%= request.getSession().getAttribute("username") %>
-        <br/>
-        <a href="/Ribbon?command=LOGOUT">ВИЙТИ</a>
-    </body>
+    <frameset rows="95px,*" cols="*" border="2px">
+        <frame src="/Ribbon?command=HEADER" noresize scrolling="no">
+        <frameset rows="*" cols="20%,80%" border="2px">
+            <frame src="/Ribbon?command=LIST_DIRS">
+            <frame src="/Ribbon?command=HEADER">
+        </frameset>
+    </frameset>
 </html>

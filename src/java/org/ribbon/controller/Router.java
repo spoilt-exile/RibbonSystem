@@ -49,4 +49,14 @@ public final class Router {
      */
     public static final String ERROR_PAGE = GENERIC_PAGE_DIR + "error.jsp";
     
+    /**
+     * LIST_DIR command page.
+     */
+    public static final String COM_LIST_DIRS = GENERIC_PAGE_DIR + "listdirs.jsp";
+    
+    /**
+     * HEADER command page.
+     */
+    public static final String COM_HEADER = GENERIC_PAGE_DIR + "header.jsp";
+    
 }

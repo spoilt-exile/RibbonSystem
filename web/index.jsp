@@ -13,7 +13,7 @@
     </head>
     <body>
         <% if (request.getSession().getAttribute("username") != null) { %>
-            <% response.sendRedirect("/Ribbon?command=FORWARD_LOGIN"); %>
+            <% response.sendRedirect("/Ribbon?command=MAIN"); %>
         <% } else { %>
             <% response.sendRedirect("/login.jsp"); %>
         <% } %>

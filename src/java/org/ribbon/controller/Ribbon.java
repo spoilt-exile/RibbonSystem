@@ -46,7 +46,7 @@ public class Ribbon extends HttpServlet {
             throws ServletException, IOException {
         String page = null;
         try {
-            Command command = CommandFactory.getInstance().getCommand(request);            
+            Command command = CommandHandler.getInstance().getCommand(request);            
             page = command.execute(request, response);
         } catch (ServletException e) {
             e.printStackTrace();

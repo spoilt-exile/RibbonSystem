@@ -25,25 +25,25 @@ import javax.servlet.http.HttpServletRequest;
  * Controller command handler;
  * @author Stanislav Nepochatov
  */
-public class CommandFactory {
+public class CommandHandler {
     
     /**
      * Instance of factory.
      */
-    private static CommandFactory instance;
+    private static CommandHandler instance;
     
     /**
      * Private constructor.
      */
-    private CommandFactory() {};
+    private CommandHandler() {};
     
     /**
      * Get instance of CommandFactory.
      * @return sigletone instance;
      */
-    public static CommandFactory getInstance() {
+    public static CommandHandler getInstance() {
         if (instance == null) {
-            instance = new CommandFactory();
+            instance = new CommandHandler();
         }
         return instance;
     }

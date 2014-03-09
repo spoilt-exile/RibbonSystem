@@ -37,7 +37,17 @@ public enum CommandTypes {
     /**
      * LOGOUT command object.
      */
-    LOGOUT(new ComLogout());
+    LOGOUT(new ComLogout()),
+    
+    /**
+     * LIST_DIRS command object.
+     */
+    LIST_DIRS(new ComListDirs()),
+    
+    /**
+     * HEADER command object.
+     */
+    HEADER(new ComHeader());
     
     /**
      * Internal command class.
