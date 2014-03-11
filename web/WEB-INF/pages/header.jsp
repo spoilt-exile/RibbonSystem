@@ -1,7 +1,7 @@
 <%-- 
     Document   : header
     Created on : 9 бер 2014, 20:45:54
-    Author     : spoilt
+    Author     : Stanislav Nepochatov
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

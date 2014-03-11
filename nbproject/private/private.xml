@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/sql/createdb.sql</file>
-            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/src/java/org/ribbon/dao/mysql/MySqlDAODirectory.java</file>
-            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/sql/filldb.sql</file>
-            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/src/java/org/ribbon/dao/mysql/MySqlDAOGroup.java</file>
+            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/web/WEB-INF/pages/listmesg.jsp</file>
+            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/web/WEB-INF/pages/main.jsp</file>
+            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/web/WEB-INF/pages/listdirs.jsp</file>
+            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/web/WEB-INF/pages/header.jsp</file>
         </group>
     </open-files>
 </project-private>

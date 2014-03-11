@@ -127,4 +127,21 @@ public class Directory {
     public void setIsHidden(Boolean isHidden) {
         this.isHidden = isHidden;
     }
+    
+    /**
+     * 
+     * @return 
+     */
+    public String getChain() {
+        String[] chunks = this.path.split("\\.");
+        String chain = "";
+        for (int index = 0; index < chunks.length; index++) {
+            if (index == chunks.length - 1) {
+                chain += chunks[index];
+            } else {
+                chain += "---";
+            }
+        }
+        return chain;
+    }
 }

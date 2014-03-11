@@ -1,7 +1,7 @@
 <%-- 
     Document   : listmesg
     Created on : 9 бер 2014, 23:02:18
-    Author     : spoilt
+    Author     : Stanislav Nepochatov
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,6 +13,7 @@
         <title>ПОВІДОМЛЕННЯ</title>
     </head>
     <body>
+        <div align="center"><h1>Повідомлення з напрямку ${param.source}</h1></div>
         <table width="100%" border="1px">
             <tr>
                 <td>Заголовок</td>
@@ -21,9 +22,9 @@
             </tr>
             <c:forEach var="message" items="${mlist}">
                 <tr>
-                    <td>${message.header}</td>
+                    <td><a href="Ribbon?command=VIEW_MESG,id=${message.id}" target="_blank">${message.header}</a></td>
                     <td>${message.postDate}</td>
-                    <td>[ПЕРЕГЛЯНУТИ] [РЕДАГУВАТИ] [ВИДАЛИТИ]</td>
+                    <td>[РЕДАГУВАТИ] [ВИДАЛИТИ]</td>
                 </tr>
             </c:forEach>
         </table>
