@@ -13,7 +13,7 @@
         <title>НАПРЯМКИ СИСТЕМИ</title>
     </head>
     <body>
-        <a href="/Ribbon?command=POST_FORM">НОВЕ ПОВІДОМЛЕННЯ</a>
+        <a href="/Ribbon?command=POST_FORM" target="_blank">НОВЕ ПОВІДОМЛЕННЯ</a>
         <HR NOSHADE>
         <c:forEach var="directory" items="${dirs}">
             <a href="/Ribbon?command=LIST_MESG&mid=${directory.id}&source=${directory.path}" target="MSG">${directory.chain}</a> <br/>
