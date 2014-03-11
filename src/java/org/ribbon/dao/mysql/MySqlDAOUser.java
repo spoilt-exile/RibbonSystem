@@ -33,69 +33,9 @@ public class MySqlDAOUser implements org.ribbon.dao.IDAOUser {
     @Override
     public boolean save(User givenUser) {
         if (givenUser.getId() == -1) {
-            Connection conn = null;
-            PreparedStatement pstn = null;
-            ResultSet res = null;
-            try {
-                conn = Utils.getConnection();
-                pstn = conn.prepareStatement("INSERT INTO User (login,description,passw,crt_date,log_date,is_admin,is_enabled,is_active) VALUES(?,?,?,?,?,?,?,0);", Statement.RETURN_GENERATED_KEYS);
-                pstn.setString(1, givenUser.getLogin());
-                pstn.setString(2, givenUser.getDescription());
-                pstn.setString(3, givenUser.getPassw());
-                pstn.setDate(4, new java.sql.Date(givenUser.getCrtDate().getTime()));
-                pstn.setDate(5, new java.sql.Date(givenUser.getLogDate().getTime()));
-                pstn.setBoolean(6, givenUser.getIsAdmin());
-                pstn.setBoolean(7, givenUser.getIsEnabled());
-                pstn.executeUpdate();
-                res = pstn.getGeneratedKeys();
-                res.next();
-                givenUser.setId(res.getInt(1));
-                return true;
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                return false;
-            } finally {
-                try {
-                    if (res != null) {
-                        res.close();
-                    }
-                    if (pstn != null) {
-                        pstn.close();
-                    }
-                    Utils.closeConnection(conn);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
+            return insert(givenUser);
         } else {
-            Connection conn = null;
-            PreparedStatement pstn = null;
-            try {
-                conn = Utils.getConnection();
-                pstn = conn.prepareStatement("UPDATE User SET login=?, description=?, passw=?, crt_date=?, log_date=?, is_admin=?, is_enabled=?, is_active=? WHERE id=" + givenUser.getId() + ";");
-                pstn.setString(1, givenUser.getLogin());
-                pstn.setString(2, givenUser.getDescription());
-                pstn.setString(3, givenUser.getPassw());
-                pstn.setDate(4, new java.sql.Date(givenUser.getCrtDate().getTime()));
-                pstn.setDate(5, new java.sql.Date(givenUser.getLogDate().getTime()));
-                pstn.setBoolean(6, givenUser.getIsAdmin());
-                pstn.setBoolean(7, givenUser.getIsEnabled());
-                pstn.setBoolean(8, givenUser.getIsActive());
-                pstn.executeUpdate();
-                return true;
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                return false;
-            } finally {
-                try {
-                    if (pstn != null) {
-                        pstn.close();
-                    }
-                    Utils.closeConnection(conn);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
+            return update(givenUser);
         }
     }
 
@@ -279,4 +219,81 @@ public class MySqlDAOUser implements org.ribbon.dao.IDAOUser {
         }
     }
     
+    /**
+     * INTERNAL insert implementation.
+     * @param givenUser user to insert;
+     * @return result of operation;
+     */
+    private Boolean insert(User givenUser) {
+        Connection conn = null;
+        PreparedStatement pstn = null;
+        ResultSet res = null;
+        try {
+            conn = Utils.getConnection();
+            pstn = conn.prepareStatement("INSERT INTO User (login,description,passw,crt_date,log_date,is_admin,is_enabled,is_active) VALUES(?,?,?,?,?,?,?,0);", Statement.RETURN_GENERATED_KEYS);
+            pstn.setString(1, givenUser.getLogin());
+            pstn.setString(2, givenUser.getDescription());
+            pstn.setString(3, givenUser.getPassw());
+            pstn.setDate(4, new java.sql.Date(givenUser.getCrtDate().getTime()));
+            pstn.setDate(5, new java.sql.Date(givenUser.getLogDate().getTime()));
+            pstn.setBoolean(6, givenUser.getIsAdmin());
+            pstn.setBoolean(7, givenUser.getIsEnabled());
+            pstn.executeUpdate();
+            res = pstn.getGeneratedKeys();
+            res.next();
+            givenUser.setId(res.getInt(1));
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (res != null) {
+                    res.close();
+                }
+                if (pstn != null) {
+                    pstn.close();
+                }
+                Utils.closeConnection(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * INTERNAL update implementation.
+     * @param givenUser user to update;
+     * @return result of operation;
+     */
+    private Boolean update(User givenUser) {
+        Connection conn = null;
+        PreparedStatement pstn = null;
+        try {
+            conn = Utils.getConnection();
+            pstn = conn.prepareStatement("UPDATE User SET login=?, description=?, passw=?, crt_date=?, log_date=?, is_admin=?, is_enabled=?, is_active=? WHERE id=" + givenUser.getId() + ";");
+            pstn.setString(1, givenUser.getLogin());
+            pstn.setString(2, givenUser.getDescription());
+            pstn.setString(3, givenUser.getPassw());
+            pstn.setDate(4, new java.sql.Date(givenUser.getCrtDate().getTime()));
+            pstn.setDate(5, new java.sql.Date(givenUser.getLogDate().getTime()));
+            pstn.setBoolean(6, givenUser.getIsAdmin());
+            pstn.setBoolean(7, givenUser.getIsEnabled());
+            pstn.setBoolean(8, givenUser.getIsActive());
+            pstn.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstn != null) {
+                    pstn.close();
+                }
+                Utils.closeConnection(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 }

@@ -33,57 +33,9 @@ public class MySqlDAOGroup implements IDAOGroup {
     @Override
     public boolean save(Group givenGroup) {
         if (givenGroup.getId() == -1) {
-            Connection conn = null;
-            PreparedStatement pstn = null;
-            ResultSet res = null;
-            try {
-                conn = Utils.getConnection();
-                pstn = conn.prepareStatement("INSERT INTO Groups (name,description) VALUES(?,?);", Statement.RETURN_GENERATED_KEYS);
-                pstn.setString(1, givenGroup.getName());
-                pstn.setString(2, givenGroup.getDescription());
-                pstn.executeUpdate();
-                res = pstn.getGeneratedKeys();
-                res.next();
-                givenGroup.setId(res.getInt(1));
-                return true;
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                return false;
-            } finally {
-                try {
-                    if (res != null) {
-                        res.close();
-                    }
-                    if (pstn != null) {
-                        pstn.close();
-                    }
-                    Utils.closeConnection(conn);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
+            return insert(givenGroup);
         } else {
-            Connection conn = null;
-            PreparedStatement pstn = null;
-            try {
-                conn = Utils.getConnection();
-                pstn = conn.prepareStatement("UPDATE Groups SET name=?, description=? WHERE id=?;");
-                pstn.setString(1, givenGroup.getName());
-                pstn.setString(2, givenGroup.getDescription());
-                pstn.setInt(3, givenGroup.getId());
-                pstn.executeUpdate();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            } finally {
-                try {
-                    if (pstn != null) {
-                        pstn.close();
-                    }
-                    Utils.closeConnection(conn);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
+            
         }
         return false;
     }
@@ -197,4 +149,71 @@ public class MySqlDAOGroup implements IDAOGroup {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    /**
+     * INTERNAL insert implementation;
+     * @param givenGroup group to insert.
+     * @return result of operation;
+     */
+    private boolean insert(Group givenGroup) {
+        Connection conn = null;
+        PreparedStatement pstn = null;
+        ResultSet res = null;
+        try {
+            conn = Utils.getConnection();
+            pstn = conn.prepareStatement("INSERT INTO Groups (name,description) VALUES(?,?);", Statement.RETURN_GENERATED_KEYS);
+            pstn.setString(1, givenGroup.getName());
+            pstn.setString(2, givenGroup.getDescription());
+            pstn.executeUpdate();
+            res = pstn.getGeneratedKeys();
+            res.next();
+            givenGroup.setId(res.getInt(1));
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (res != null) {
+                    res.close();
+                }
+                if (pstn != null) {
+                    pstn.close();
+                }
+                Utils.closeConnection(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * Internal update implementation.
+     * @param givenGroup group to update;
+     * @return result of operation;
+     */
+    private boolean update(Group givenGroup) {
+        Connection conn = null;
+        PreparedStatement pstn = null;
+        try {
+            conn = Utils.getConnection();
+            pstn = conn.prepareStatement("UPDATE Groups SET name=?, description=? WHERE id=?;");
+            pstn.setString(1, givenGroup.getName());
+            pstn.setString(2, givenGroup.getDescription());
+            pstn.setInt(3, givenGroup.getId());
+            pstn.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (pstn != null) {
+                    pstn.close();
+                }
+                Utils.closeConnection(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 }
