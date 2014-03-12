@@ -13,7 +13,7 @@
         <title>ПОВІДОМЛЕННЯ</title>
     </head>
     <body>
-        <div align="center"><h1>Повідомлення з напрямку ${param.source}</h1></div>
+        <div align="center"><h1>Повідомлення з напрямку ${param.dirname}</h1></div>
         <table width="100%" border="1px">
             <tr>
                 <td>Заголовок</td>

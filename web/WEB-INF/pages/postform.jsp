@@ -12,8 +12,9 @@
         <title>НОВЕ ПОВІДОМЛЕННЯ</title>
     </head>
     <body>
+        <a href="/Ribbon?command=LIST_MESG&dirid=${sessionScope["last_dir"]}&dirname=${sessionScope["last_dir_name"]}" target="MSG">НАЗАД</a><br/>
         <form action="/Ribbon?command=POST_MESG" method="POST">
-            <input type="hidden" name="directory" value="Система.Тест">
+            <input type="hidden" name="directory" value="${sessionScope["last_dir_name"]}">
             ЗАГОЛОВОК: <input type="text" name="header" size="75"><br/>
             ТЕРМІНОВО: <input type="checkbox" name="urgent"><br/>
             ТЕКСТ ПОВІДОМЛЕННЯ:<br/>

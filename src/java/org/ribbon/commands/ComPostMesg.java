@@ -43,7 +43,7 @@ public class ComPostMesg implements Command {
         posted.setIsUrgent(false);
         posted.setBody(request.getParameter("body"));
         org.ribbon.dao.mysql.MySqlDAOFactory.getNewInstance().getNewDaoMessageInstance().save(posted);
-        return Router.MAIN_PAGE;
+        return "/Ribbon?command=LIST_MESG&dirid=" + request.getSession().getAttribute("last_dir") + "&dirname=" + request.getSession().getAttribute("last_dir_name");
     }
 
     @Override

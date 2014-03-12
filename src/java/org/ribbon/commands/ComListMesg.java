@@ -33,8 +33,10 @@ public class ComListMesg implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("mid") != null) {
-            request.setAttribute("mlist", MySqlDAOFactory.getNewInstance().getNewDaoMessageInstance().getMessagesByDirId(Integer.parseInt(request.getParameter("mid"))));
+        if (request.getParameter("dirid") != null && request.getParameter("dirname") != null) {
+            request.getSession().setAttribute("last_dir_name", request.getParameter("dirname"));
+            request.getSession().setAttribute("last_dir", request.getParameter("dirid"));
+            request.setAttribute("mlist", MySqlDAOFactory.getNewInstance().getNewDaoMessageInstance().getMessagesByDirId(Integer.parseInt(request.getParameter("dirid"))));
         }
         return Router.COM_LIST_MESG;
     }
