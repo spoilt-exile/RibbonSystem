@@ -41,7 +41,40 @@ public class MySqlDAOMessage implements IDAOMessage {
 
     @Override
     public Message getMessageById(int givenId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = null;
+        PreparedStatement pstn = null;
+        ResultSet res = null;
+        try {
+            Message fMessage = new Message();
+            conn = Utils.getConnection();
+            pstn = conn.prepareStatement("SELECT * FROM Message WHERE id=?;");
+            pstn.setInt(1, givenId);
+            res = pstn.executeQuery();
+            res.next();
+            fMessage.setId(res.getInt("id"));
+            fMessage.setHeader(res.getString("header"));
+            fMessage.setDirId(res.getInt("dir_id"));
+            fMessage.setPostDate(res.getDate("post_date"));
+            fMessage.setAuthId(res.getInt("auth_id"));
+            fMessage.setIsUrgent(res.getBoolean("is_urgent"));
+            fMessage.setBody(res.getString("body"));
+            return fMessage;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (res != null) {
+                    res.close();
+                }
+                if (pstn != null) {
+                    pstn.close();
+                }
+                Utils.closeConnection(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override

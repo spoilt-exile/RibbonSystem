@@ -22,7 +22,7 @@
             </tr>
             <c:forEach var="message" items="${mlist}">
                 <tr>
-                    <td><a href="Ribbon?command=VIEW_MESG,id=${message.id}" target="_blank">${message.header}</a></td>
+                    <td><a href="Ribbon?command=VIEW_MESG&id=${message.id}" target="MSG">${message.header}</a></td>
                     <td>${message.postDate}</td>
                     <td>[РЕДАГУВАТИ] [ВИДАЛИТИ]</td>
                 </tr>

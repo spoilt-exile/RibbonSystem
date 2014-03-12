@@ -59,7 +59,9 @@ public enum CommandTypes {
      */
     POST_FORM(new ComPostForm()),
     
-    POST_MESG(new ComPostMesg());
+    POST_MESG(new ComPostMesg()),
+    
+    VIEW_MESG(new ComViewMesg());
     
     /**
      * Internal command class.

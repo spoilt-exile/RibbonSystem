@@ -193,4 +193,8 @@ public class Message {
     public void setBody(String body) {
         this.body = body;
     }
+    
+    public String getText() {
+        return this.body.replaceAll("\n", "<br/>");
+    }
 }
