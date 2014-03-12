@@ -41,7 +41,37 @@ public class MySqlDAODirectory implements IDAODirectory {
 
     @Override
     public Directory getDirById(int givenId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = null;
+        PreparedStatement pstn = null;
+        ResultSet res = null;
+        try {
+            conn = Utils.getConnection();
+            pstn = conn.prepareStatement("SELECT * FROM Directory WHERE id=?;");
+            pstn.setInt(1, givenId);
+            res = pstn.executeQuery();
+            res.next();
+            Directory addDir = new Directory();
+            addDir.setId(res.getInt("id"));
+            addDir.setPath(res.getString("path"));
+            addDir.setDescription(res.getString("description"));
+            addDir.setIsHidden(res.getBoolean("is_hidden"));
+            return addDir;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (res != null) {
+                    res.close();
+                }
+                if (pstn != null) {
+                    pstn.close();
+                }
+                Utils.closeConnection(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -134,7 +164,7 @@ public class MySqlDAODirectory implements IDAODirectory {
             pstn.executeUpdate();
             res = pstn.getGeneratedKeys();
             res.next();
-            givenDir.setId(res.getInt("id"));
+            givenDir.setId(res.getInt(1));
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();

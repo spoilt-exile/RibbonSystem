@@ -101,7 +101,7 @@ public class MySqlDAOMessage implements IDAOMessage {
             pstn.executeUpdate();
             res = pstn.getGeneratedKeys();
             res.next();
-            givenMessage.setId(res.getInt("id"));
+            givenMessage.setId(res.getInt(1));
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
