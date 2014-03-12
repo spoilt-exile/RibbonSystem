@@ -55,9 +55,11 @@ public enum CommandTypes {
     HEADER(new ComHeader()),
     
     /**
-     * 
+     * POST_FORM command object.
      */
-    POST_FORM(new ComPostForm());
+    POST_FORM(new ComPostForm()),
+    
+    POST_MESG(new ComPostMesg());
     
     /**
      * Internal command class.

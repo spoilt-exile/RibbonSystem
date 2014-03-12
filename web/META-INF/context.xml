@@ -1,15 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context crossContext="true" reloadable="true" antiJARLocking="true" path="">
-    <Resource name="jdbc/ribbon"
-        auth="Container" 
-        description="RibbonSystem connect pool" 
-        username="ribbon" 
-        password="9ARb@Pas$"
-        driverClassName="com.mysql.jdbc.Driver" 
-        url="jdbc:mysql://localhost:3306/ribbon"
-        maxActive="10" 
-        maxIdle="3" 
-        maxWait="100"
-        factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" 
-        type="javax.sql.DataSource"></Resource>
+<Context antiJARLocking="true" crossContext="true" path="" reloadable="true">
+  <Resource auth="Container" description="RibbonSystem connect pool" driverClassName="com.mysql.jdbc.Driver" factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" maxActive="10" maxIdle="3" maxWait="100" name="jdbc/ribbon" password="9ARb@Pas$" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/ribbon?characterEncoding=UTF-8" username="ribbon"/>
 </Context>

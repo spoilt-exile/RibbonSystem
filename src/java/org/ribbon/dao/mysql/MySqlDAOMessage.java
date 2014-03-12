@@ -32,7 +32,11 @@ public class MySqlDAOMessage implements IDAOMessage {
 
     @Override
     public boolean save(Message givenMessage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (givenMessage.getId() == -1) {
+            return insert(givenMessage);
+        } else {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
     }
 
     @Override
@@ -81,4 +85,39 @@ public class MySqlDAOMessage implements IDAOMessage {
         }
     }
     
+    private Boolean insert(Message givenMessage) {
+        Connection conn = null;
+        PreparedStatement pstn = null;
+        ResultSet res = null;
+        try {
+            conn = Utils.getConnection();
+            pstn = conn.prepareStatement("INSERT INTO Message (header, dir_id, post_date, auth_id, is_urgent, body) VALUES(?, ?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
+            pstn.setString(1, givenMessage.getHeader());
+            pstn.setInt(2, givenMessage.getDirId());
+            pstn.setDate(3, new java.sql.Date(givenMessage.getPostDate().getTime()));
+            pstn.setInt(4, givenMessage.getAuthId());
+            pstn.setBoolean(5, givenMessage.getIsUrgent());
+            pstn.setString(6, givenMessage.getBody());
+            pstn.executeUpdate();
+            res = pstn.getGeneratedKeys();
+            res.next();
+            givenMessage.setId(res.getInt("id"));
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (res != null) {
+                    res.close();
+                }
+                if (pstn != null) {
+                    pstn.close();
+                }
+                Utils.closeConnection(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 }
