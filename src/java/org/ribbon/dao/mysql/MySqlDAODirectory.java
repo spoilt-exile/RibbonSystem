@@ -118,7 +118,7 @@ public class MySqlDAODirectory implements IDAODirectory {
             List<Directory> rList = new ArrayList<Directory>();
             conn = Utils.getConnection();
             stn = conn.createStatement();
-            res = stn.executeQuery("SELECT * FROM Directory;");
+            res = stn.executeQuery("SELECT * FROM Directory ORDER BY path ASC;");
             while (res.next()) {
                 Directory addDir = new Directory();
                 addDir.setId(res.getInt("id"));

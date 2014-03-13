@@ -23,6 +23,22 @@ INSERT INTO UserGroupsRel (user_id,group_id,is_enabled) VALUES (2, 1, TRUE);
 INSERT INTO Directory (path,description,is_hidden) VALUES ("Система", NULL, FALSE);
 #DIR_ID = 2
 INSERT INTO Directory (path,description,is_hidden) VALUES ("Система.Тест", "Тестовий напрямок випуску", FALSE);
+#DIR_ID = 3
+INSERT INTO Directory (path,description,is_hidden) VALUES ("Редакція", NULL, FALSE);
+#DIR_ID = 4
+INSERT INTO Directory (path,description,is_hidden) VALUES ("Редакція.Економіка", "Економічна інформація", FALSE);
+#DIR_ID = 5
+INSERT INTO Directory (path,description,is_hidden) VALUES ("Редакція.Політика", "Політика", FALSE);
+#DIR_ID = 6
+INSERT INTO Directory (path,description,is_hidden) VALUES ("Редакція.РНБО", "Інформаційний спротив", FALSE);
+#DIR_ID = 7
+INSERT INTO Directory (path,description,is_hidden) VALUES ("Випуск", "ВИПУСК ІНФОРМАЦІЇ", FALSE);
+#DIR_ID = 8
+INSERT INTO Directory (path,description,is_hidden) VALUES ("Випуск.ЄПС", "Єдина подієва стрічка", FALSE);
+#DIR_ID = 9
+INSERT INTO Directory (path,description,is_hidden) VALUES ("Випуск.ЄПС.Українська", "СТРІЧКА УКРАЇНСЬКА", FALSE);
+#DIR_ID = 10
+INSERT INTO Directory (path,description,is_hidden) VALUES ("Випуск.ЄПС.Англійська", "СТРІЧКА АНГЛІЙСЬКА", FALSE);
 
 #CREATE PERMISSIONS
 #ADD PERMISSION FOR DIRECTORY FOR ALL TO POST AND READ

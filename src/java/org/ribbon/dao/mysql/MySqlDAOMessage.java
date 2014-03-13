@@ -85,7 +85,7 @@ public class MySqlDAOMessage implements IDAOMessage {
         try {
             List<Message> rList = new ArrayList<Message>();
             conn = Utils.getConnection();
-            pstn = conn.prepareStatement("SELECT Message.* FROM Message JOIN Directory WHERE Directory.id=dir_id AND dir_id=?;");
+            pstn = conn.prepareStatement("SELECT Message.* FROM Message JOIN Directory WHERE Directory.id=dir_id AND dir_id=? ORDER BY Message.id DESC;");
             pstn.setInt(1, givenDirId);
             res = pstn.executeQuery();
             while (res.next()) {
