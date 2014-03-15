@@ -4,10 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/web/WEB-INF/pages/listmesg.jsp</file>
-            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/web/WEB-INF/pages/main.jsp</file>
-            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/src/java/org/ribbon/enteties/Message.java</file>
-            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/web/WEB-INF/pages/listdirs.jsp</file>
-            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/web/WEB-INF/pages/header.jsp</file>
+            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/web/WEB-INF/pages/postform.jsp</file>
+            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/src/java/org/ribbon/commands/ComPostMesg.java</file>
+            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/web/WEB-INF/pages/viewmesg.jsp</file>
         </group>
     </open-files>
 </project-private>

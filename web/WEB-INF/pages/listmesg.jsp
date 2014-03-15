@@ -22,7 +22,15 @@
             </tr>
             <c:forEach var="message" items="${mlist}">
                 <tr>
-                    <td><a href="Ribbon?command=VIEW_MESG&id=${message.id}" target="MSG">${message.header}</a></td>
+                    <c:choose>
+                        <c:when test="${message.isUrgent}">
+                            <td><a href="Ribbon?command=VIEW_MESG&id=${message.id}" target="MSG"><font color="red">${message.header}</font></a></td>
+                        </c:when>
+                        <c:otherwise>
+                            <td><a href="Ribbon?command=VIEW_MESG&id=${message.id}" target="MSG">${message.header}</a></td>
+                        </c:otherwise>
+                    </c:choose>
+                    
                     <td>${message.postDate}</td>
                     <td>[РЕДАГУВАТИ] [ВИДАЛИТИ]</td>
                 </tr>

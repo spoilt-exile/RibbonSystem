@@ -23,7 +23,6 @@ import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.ribbon.controller.Router;
 import org.ribbon.enteties.Message;
 
 /**
@@ -39,8 +38,7 @@ public class ComPostMesg implements Command {
         posted.setDirId(org.ribbon.dao.mysql.MySqlDAOFactory.getNewInstance().getNewDaoDirectoryInstance().getDirByPath(request.getParameter("directory")).getId());
         posted.setPostDate(new Date());
         posted.setAuthId(org.ribbon.dao.mysql.MySqlDAOFactory.getNewInstance().getNewIDaoUserInstance().getUserByLogin(request.getSession().getAttribute("username").toString()).getId());
-        //posted.setIsUrgent(request.getParameter("urgent").equals("on"));
-        posted.setIsUrgent(false);
+        posted.setIsUrgent("urgent".equals(request.getParameter("urgent")));
         posted.setBody(request.getParameter("body"));
         org.ribbon.dao.mysql.MySqlDAOFactory.getNewInstance().getNewDaoMessageInstance().save(posted);
         return "/Ribbon?command=LIST_MESG&dirid=" + request.getSession().getAttribute("last_dir") + "&dirname=" + request.getSession().getAttribute("last_dir_name");

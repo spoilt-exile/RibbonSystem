@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix ="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,6 +18,9 @@
         <b>АВТОР:</b> ${auth.login} (${auth.description}) <br/>
         <b>НАПРЯМОК:</b> ${sessionScope["last_dir_name"]} <br/>
         <b>ДАТА ВИПУСКУ:</b> ${mesg.postDate} <br/>
+        <c:if test="${mesg.isUrgent}">
+            <b><font color="red">ТЕРМІНОВО!</font></b><br/>
+        </c:if>
         <br/>
         ${mesg.text}
     </body>
