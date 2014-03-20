@@ -2,11 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/web/WEB-INF/pages/listmesg.jsp</file>
-            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/web/WEB-INF/pages/postform.jsp</file>
-            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/src/java/org/ribbon/commands/ComPostMesg.java</file>
-            <file>file:/home/spoilt/BIONIC/JAVA%20EE%20(E-11)/RibbonSystem/web/WEB-INF/pages/viewmesg.jsp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

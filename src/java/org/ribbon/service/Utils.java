@@ -59,7 +59,7 @@ public class Utils {
      */
     public static Connection getConnection() throws NamingException, SQLException {
         Connection newcon = null;
-        DataSource ds = (DataSource) InitialContext.doLookup("java:comp/env/jdbc/ribbon");
+        DataSource ds = (DataSource) InitialContext.doLookup("ribbonSource");
         return ds.getConnection();
     }
     
