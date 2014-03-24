@@ -23,10 +23,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.ribbon.controller.Router;
-import org.ribbon.enteties.User;
-import org.ribbon.dao.mysql.*;
+import org.ribbon.jpa.enteties.User;
 import org.ribbon.service.Utils;
 import java.util.Date;
+import javax.persistence.*;
 
 /**
  * LOGIN command class.
@@ -36,7 +36,12 @@ public class ComLogin implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User findedUser = MySqlDAOFactory.getNewInstance().getNewIDaoUserInstance().getUserByLogin(request.getParameter("login"));
+        EntityManager em = Persistence.createEntityManagerFactory("RibbonSystemPU").createEntityManager();
+        EntityTransaction tr = em.getTransaction();
+        tr.begin();
+        TypedQuery<User> qr = em.createNamedQuery("User.findByLogin", User.class);
+        qr.setParameter("login", request.getParameter("login"));
+        User findedUser = qr.getSingleResult();
         if (findedUser == null) {
             response.addHeader("login_error", "NOT_FOUND_OR_INCORRECT_PASSWD " + request.getParameter("login"));
             return Router.DEFAULT_PAGE;
@@ -45,7 +50,7 @@ public class ComLogin implements Command {
             request.getSession().setAttribute("username", findedUser.getLogin());
             findedUser.setIsActive(true);
             findedUser.setLogDate(new Date());
-            MySqlDAOFactory.getNewInstance().getNewIDaoUserInstance().save(findedUser);
+            tr.commit();
             return Router.MAIN_PAGE;
         } else {
             response.addHeader("login_error", "NOT_FOUND_OR_INCORRECT_PASSWD " + request.getParameter("login"));
