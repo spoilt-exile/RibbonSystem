@@ -113,7 +113,7 @@ public class Message implements Serializable {
      * LINK TO: <code>User</code> table;
      */
     @JoinColumn(name = "auth_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private User authId;
 
     /**

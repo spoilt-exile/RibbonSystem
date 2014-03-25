@@ -17,6 +17,7 @@
         <table width="100%" border="1px">
             <tr>
                 <td>Заголовок</td>
+                <td>Автор</td>
                 <td>Дата випуску</td>
                 <td>Дії</td>
             </tr>
@@ -30,7 +31,9 @@
                             <td><a href="Ribbon?command=VIEW_MESG&id=${message.id}" target="MSG">${message.header}</a></td>
                         </c:otherwise>
                     </c:choose>
-                    
+                    <c:set var="author" value="${message.authId}">
+                    </c:set>
+                    <td>${author.login}</td>
                     <td>${message.postDate}</td>
                     <td>[РЕДАГУВАТИ] [ВИДАЛИТИ]</td>
                 </tr>

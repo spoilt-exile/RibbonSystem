@@ -24,8 +24,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.ribbon.controller.Router;
-import org.ribbon.dao.mysql.MySqlDAOFactory;
-import org.ribbon.enteties.User;
+import org.ribbon.jpa.JPAManager;
+import org.ribbon.jpa.enteties.User;
+import javax.persistence.*;
 
 /**
  * MAIN command class (check session and load main page, used by default by calling root of controller).
@@ -35,11 +36,16 @@ public class ComMain implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User findedUser = MySqlDAOFactory.getNewInstance().getNewIDaoUserInstance().getUserByLogin((String) request.getSession().getAttribute("username"));
+        EntityManager em = JPAManager.getEntityManager();
+        TypedQuery<User> qr = em.createNamedQuery("User.findByLogin", User.class);
+        qr.setParameter("login", request.getSession().getAttribute("username"));
+        User findedUser = qr.getSingleResult();
         if (findedUser != null) {
+            EntityTransaction tr = em.getTransaction();
+            tr.begin();
             findedUser.setIsActive(true);
             findedUser.setLogDate(new Date());
-            MySqlDAOFactory.getNewInstance().getNewIDaoUserInstance().save(findedUser);
+            tr.commit();
             return Router.MAIN_PAGE;
         } else {
             request.getSession().removeAttribute("username");

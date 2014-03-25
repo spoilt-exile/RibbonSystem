@@ -23,7 +23,9 @@ import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.ribbon.enteties.Message;
+import javax.persistence.*;
+import org.ribbon.jpa.JPAManager;
+import org.ribbon.jpa.enteties.*;
 
 /**
  * POST_MESG command class.
@@ -33,14 +35,25 @@ public class ComPostMesg implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        EntityManager em = JPAManager.getEntityManager();
+        EntityTransaction tr = em.getTransaction();
+        tr.begin();
         Message posted = new Message();
         posted.setHeader(request.getParameter("header"));
-        posted.setDirId(org.ribbon.dao.mysql.MySqlDAOFactory.getNewInstance().getNewDaoDirectoryInstance().getDirByPath(request.getParameter("directory")).getId());
+        TypedQuery<Directory> qr1 = em.createNamedQuery("Directory.findByPath", Directory.class);
+        qr1.setParameter("path", request.getParameter("directory"));
+        Directory findedDIr = qr1.getSingleResult();
+        posted.setDirId(findedDIr);
         posted.setPostDate(new Date());
-        posted.setAuthId(org.ribbon.dao.mysql.MySqlDAOFactory.getNewInstance().getNewIDaoUserInstance().getUserByLogin(request.getSession().getAttribute("username").toString()).getId());
+        TypedQuery<User> qr2 = em.createNamedQuery("User.findByLogin", User.class);
+        qr2.setParameter("login", request.getSession().getAttribute("username"));
+        User findedUser = qr2.getSingleResult();
+        posted.setAuthId(findedUser);
         posted.setIsUrgent("urgent".equals(request.getParameter("urgent")));
         posted.setBody(request.getParameter("body"));
-        org.ribbon.dao.mysql.MySqlDAOFactory.getNewInstance().getNewDaoMessageInstance().save(posted);
+        em.persist(posted);
+        tr.commit();
+        em.close();
         return "/Ribbon?command=LIST_MESG&dirid=" + request.getSession().getAttribute("last_dir") + "&dirname=" + request.getSession().getAttribute("last_dir_name");
     }
 

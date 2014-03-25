@@ -23,8 +23,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.ribbon.controller.Router;
-import org.ribbon.dao.mysql.MySqlDAOFactory;
-import org.ribbon.enteties.User;
+import javax.persistence.*;
+import org.ribbon.jpa.JPAManager;
+import org.ribbon.jpa.enteties.*;
 
 /**
  * LOGOUT command (for exit from the system).
@@ -34,12 +35,18 @@ public class ComLogout implements Command{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User findedUser = MySqlDAOFactory.getNewInstance().getNewIDaoUserInstance().getUserByLogin((String) request.getSession().getAttribute("username"));
+        EntityManager em = JPAManager.getEntityManager();
+        TypedQuery<User> qr = em.createNamedQuery("User.findByLogin", User.class);
+        qr.setParameter("login", request.getSession().getAttribute("username"));
+        User findedUser = qr.getSingleResult();
+        EntityTransaction tr = em.getTransaction();
+        tr.begin();
         if (findedUser != null) {
             findedUser.setIsActive(false);
-            MySqlDAOFactory.getNewInstance().getNewIDaoUserInstance().save(findedUser);
             request.getSession().removeAttribute("username");
         }
+        tr.commit();
+        em.close();
         return Router.DEFAULT_PAGE;
     }
 
