@@ -23,6 +23,8 @@ import java.util.Date;
 /**
  * User entity class for DAO.
  * @author Stanislav Nepochatov
+ * @deprecated use JPA entity!
+ * @see org.ribbon.jpa.enteties.User
  */
 public class User {
     

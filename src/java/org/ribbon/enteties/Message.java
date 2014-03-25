@@ -23,6 +23,8 @@ import java.util.Date;
 /**
  * Message entity class for DAO;
  * @author Stanislav Nepochatov
+ * @deprecated use JPA entity!
+ * @see org.ribbon.jpa.enteties.Message
  */
 public class Message {
     

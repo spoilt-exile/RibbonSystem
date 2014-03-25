@@ -21,6 +21,8 @@ package org.ribbon.enteties;
 /**
  * Directory permission class for DAO.
  * @author Stanislav Nepochatov
+ * @deprecated use JPA entity!
+ * @see org.ribbon.jpa.enteties.Permission
  */
 public class Permission {
     

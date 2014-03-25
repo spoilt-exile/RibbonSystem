@@ -21,6 +21,8 @@ package org.ribbon.enteties;
 /**
  * Group entity class for DAO.
  * @author Stanislav Nepochatov
+ * @deprecated use JPA entity!
+ * @see org.ribbon.jpa.enteties.Groups
  */
 public class Group {
     

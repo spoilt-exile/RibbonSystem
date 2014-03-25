@@ -16,36 +16,31 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-package org.ribbon.dao;
+package org.ribbon.jpa;
+
+import javax.persistence.*;
 
 /**
- * Abstract DAO factory class;
+ * JPA management class;
  * @author Stanislav Nepochatov
- * @deprecated use JPA, Luke!
  */
-public abstract class DAOFactory {
+public final class JPAManager {
     
     /**
-     * Get IDAOUser new instance from factory;
-     * @return new instance of user DAO;
+     * Get entitymanager for system default persistence unit;
+     * @return entity manager;
      */
-    public abstract IDAOUser getNewIDaoUserInstance();
+    public static EntityManager getEntityManager() {
+        return Persistence.createEntityManagerFactory("RibbonSystemPU").createEntityManager();
+    }
     
     /**
-     * Get IDAOGroup new instance from factory;
-     * @return new instance of group DAO;
+     * Get entitymanager for system specified persistence unit;
+     * @param persistName persistence name unit;
+     * @return entity manager;
      */
-    public abstract IDAOGroup getNewIDaoGroupInstance();
+    public static EntityManager getEntityManager(String persistName) {
+        return Persistence.createEntityManagerFactory(persistName).createEntityManager();
+    }
     
-    /**
-     * Get IDAODirectory new instance from factory;
-     * @return new instance of directory DAO;
-     */
-    public abstract IDAODirectory getNewDaoDirectoryInstance();
-    
-    /**
-     * Get IDAOMessage new instance from factory;
-     * @return new instance of message DAO;
-     */
-    public abstract IDAOMessage getNewDaoMessageInstance();
 }

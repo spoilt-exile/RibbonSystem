@@ -24,6 +24,7 @@ import org.ribbon.enteties.*;
 /**
  * RibbonSystem directory DAO interface;
  * @author Stanislav Nepochatov
+ * @deprecated use JPA, Luke!
  */
 public interface IDAODirectory {
     

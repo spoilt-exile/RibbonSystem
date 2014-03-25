@@ -21,6 +21,8 @@ package org.ribbon.enteties;
 /**
  * System user entity for DAO.
  * @author Stanislav Nepochatov
+ * @deprecated use JPA entity!
+ * @see org.ribbon.jpa.enteties.Directory
  */
 public class Directory {
     

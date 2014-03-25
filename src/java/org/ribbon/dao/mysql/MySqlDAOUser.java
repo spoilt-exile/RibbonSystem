@@ -27,6 +27,7 @@ import org.ribbon.service.*;
 /**
  * MySql implementation of User DAO.
  * @author Stanislav Nepochatov
+ * @deprecated use JPA, Luke!
  */
 public class MySqlDAOUser implements org.ribbon.dao.IDAOUser {
 

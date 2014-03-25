@@ -26,6 +26,7 @@ import org.ribbon.dao.IDAOUser;
 /**
  * MySql DAO factory class;
  * @author Stanislav Nepochatov
+ * @deprecated use JPA, Luke!
  */
 public class MySqlDAOFactory extends org.ribbon.dao.DAOFactory {
     

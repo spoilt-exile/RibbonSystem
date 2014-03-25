@@ -23,7 +23,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.ribbon.controller.Router;
-import org.ribbon.dao.mysql.MySqlDAOFactory;
+import org.ribbon.jpa.enteties.Message;
+import org.ribbon.jpa.enteties.Directory;
+import org.ribbon.jpa.JPAManager;
+import javax.persistence.*;
 
 /**
  * LIST_MESG command class.
@@ -36,7 +39,11 @@ public class ComListMesg implements Command {
         if (request.getParameter("dirid") != null && request.getParameter("dirname") != null) {
             request.getSession().setAttribute("last_dir_name", request.getParameter("dirname"));
             request.getSession().setAttribute("last_dir", request.getParameter("dirid"));
-            request.setAttribute("mlist", MySqlDAOFactory.getNewInstance().getNewDaoMessageInstance().getMessagesByDirId(Integer.parseInt(request.getParameter("dirid"))));
+            EntityManager em = JPAManager.getEntityManager();
+            TypedQuery qr = em.createNamedQuery("Message.findByDirIdSortId", Message.class);
+            qr.setParameter("dirId", em.find(Directory.class, new Integer(request.getParameter("dirid"))));
+            request.setAttribute("mlist", qr.getResultList());
+            em.close();
         }
         return Router.COM_LIST_MESG;
     }

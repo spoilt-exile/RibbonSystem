@@ -27,6 +27,7 @@ import java.sql.*;
 /**
  * MySql implementation of Group DAO.
  * @author Stanislav Nepochatov
+ * @deprecated use JPA, Luke!
  */
 public class MySqlDAOGroup implements IDAOGroup {
 

@@ -20,11 +20,12 @@ package org.ribbon.commands;
 
 import java.io.IOException;
 import java.util.List;
-import org.ribbon.enteties.Directory;
-import org.ribbon.dao.mysql.MySqlDAOFactory;
+import org.ribbon.jpa.JPAManager;
+import org.ribbon.jpa.enteties.Directory;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.persistence.*;
 import org.ribbon.controller.Router;
 
 /**
@@ -35,7 +36,10 @@ public class ComListDirs implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Directory> dirs = MySqlDAOFactory.getNewInstance().getNewDaoDirectoryInstance().getAll();
+        EntityManager em = JPAManager.getEntityManager();
+        TypedQuery qr = em.createNamedQuery("Directory.findAllSortPath", Directory.class);
+        List<Directory> dirs = qr.getResultList();
+        em.close();
         request.setAttribute("dirs", dirs);
         return Router.COM_LIST_DIRS;
     }

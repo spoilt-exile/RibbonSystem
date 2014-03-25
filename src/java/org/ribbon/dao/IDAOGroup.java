@@ -24,6 +24,7 @@ import org.ribbon.enteties.*;
 /**
  * Ribbon system group DAO interface.
  * @author Stanislav Nepochatov
+ * @deprecated use JPA, Luke!
  */
 public interface IDAOGroup {
     

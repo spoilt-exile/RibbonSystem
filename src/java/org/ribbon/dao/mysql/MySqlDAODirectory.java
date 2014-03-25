@@ -27,6 +27,7 @@ import org.ribbon.service.Utils;
 /**
  * MySql implementation of Directory DAO.
  * @author Stanislav Nepochatov
+ * @deprecated use JPA, Luke!
  */
 public class MySqlDAODirectory implements IDAODirectory {
 

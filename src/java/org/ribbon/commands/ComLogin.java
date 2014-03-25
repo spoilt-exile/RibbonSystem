@@ -51,8 +51,10 @@ public class ComLogin implements Command {
             findedUser.setIsActive(true);
             findedUser.setLogDate(new Date());
             tr.commit();
+            em.close();
             return Router.MAIN_PAGE;
         } else {
+            em.close();
             response.addHeader("login_error", "NOT_FOUND_OR_INCORRECT_PASSWD " + request.getParameter("login"));
             return Router.DEFAULT_PAGE;
         }

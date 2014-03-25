@@ -56,6 +56,8 @@ public class Utils {
      * @return connection from pool;
      * @throws NamingException if resource not available;
      * @throws SQLException if connection cann't be established;
+     * @deprecated use methods of JPAManager class;
+     * @see org.ribbon.jpa.JPAManager
      */
     public static Connection getConnection() throws NamingException, SQLException {
         Connection newcon = null;
@@ -67,6 +69,8 @@ public class Utils {
      * Close used connection and place it to the pool.
      * @param usedConn connection to close;
      * @throws SQLException if something went wrong;
+     * @deprecated use methods of JPAManager class;
+     * @see org.ribbon.jpa.JPAManager
      */
     public static void closeConnection(Connection usedConn) throws SQLException {
         if (usedConn != null) {

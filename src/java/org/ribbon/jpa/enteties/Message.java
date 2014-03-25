@@ -47,6 +47,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Message.findAll", query = "SELECT m FROM Message m"),
     @NamedQuery(name = "Message.findById", query = "SELECT m FROM Message m WHERE m.id = :id"),
+    @NamedQuery(name = "Message.findByDirIdSortId", query = "SELECT m FROM Message m WHERE m.dirId = :dirId ORDER BY m.id DESC"),
     @NamedQuery(name = "Message.findByPostDate", query = "SELECT m FROM Message m WHERE m.postDate = :postDate"),
     @NamedQuery(name = "Message.findByIsUrgent", query = "SELECT m FROM Message m WHERE m.isUrgent = :isUrgent")})
 public class Message implements Serializable {

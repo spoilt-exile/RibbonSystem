@@ -24,6 +24,7 @@ import org.ribbon.enteties.Message;
 /**
  * RibbonSystem message DAO interface;
  * @author Stanislav Nepochatov
+ * @deprecated use JPA, Luke!
  */
 public interface IDAOMessage {
     

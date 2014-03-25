@@ -44,6 +44,7 @@ import javax.validation.constraints.Size;
 @Table(name = "Directory")
 @NamedQueries({
     @NamedQuery(name = "Directory.findAll", query = "SELECT d FROM Directory d"),
+    @NamedQuery(name = "Directory.findAllSortPath", query = "SELECT d FROM Directory d ORDER BY d.path"),
     @NamedQuery(name = "Directory.findById", query = "SELECT d FROM Directory d WHERE d.id = :id"),
     @NamedQuery(name = "Directory.findByDescription", query = "SELECT d FROM Directory d WHERE d.description = :description"),
     @NamedQuery(name = "Directory.findByIsHidden", query = "SELECT d FROM Directory d WHERE d.isHidden = :isHidden")})
